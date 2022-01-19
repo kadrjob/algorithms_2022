@@ -13,3 +13,26 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 -- нельзя использовать встроенные функции min() и sort()
 """
+
+
+def check_1(lst_obj):
+    m = 0
+    for v in lst_obj:
+        if v < m:
+            m = v
+
+    return m
+
+
+def check_2(lst_obj):
+    m = 0
+    f = 0
+    for i in range(len(lst_obj)):
+        if (lst_obj[i] < m) and (f == 0):
+            m = lst_obj[i]
+            f = 1
+    return m
+
+
+print(check_1([10, 15, 2, 8, 9, -8]))
+print(check_2([10, 15, 2, 8, 9, -8]))
