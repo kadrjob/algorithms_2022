@@ -49,6 +49,11 @@ def run():
     if not user_value1.isdigit():
         print('Вы ввели не число. Исправьтесь')
 
+    # добавлена проверка деления на ноль
+    if user_operation == '/' and user_value2 == '0':
+        print('На ноль делить нельзя!')
+        run()
+
     result = eval(f'{user_value1}{user_operation}{user_value2}')
 
     print(f'Ваш результат {result}')
