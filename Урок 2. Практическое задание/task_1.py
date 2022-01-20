@@ -27,3 +27,37 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def run():
+    valid_operations = ['0', '+', '-', '*', '/']
+    user_operation = input('Введите операцию (+, -, *, / или 0 для выхода): ').strip()
+
+    if user_operation not in valid_operations:
+        print(f'Вы ввели неверную операцию. Доступные операции {str(valid_operations)}', )
+        run()
+
+    if user_operation == '0':
+        return
+
+    user_value1 = input('Введите первое число: ').strip()
+    if not user_value1.isdigit():
+        print('Вы ввели не число. Исправьтесь')
+        run()
+
+    user_value2 = input('Введите второе число: ').strip()
+    if not user_value1.isdigit():
+        print('Вы ввели не число. Исправьтесь')
+
+    # добавлена проверка деления на ноль
+    if user_operation == '/' and user_value2 == '0':
+        print('На ноль делить нельзя!')
+        run()
+
+    result = eval(f'{user_value1}{user_operation}{user_value2}')
+
+    print(f'Ваш результат {result}')
+    run()
+
+
+run()
