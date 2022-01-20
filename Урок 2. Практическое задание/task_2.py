@@ -17,3 +17,30 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def d_count(user_value, val1, val2):
+    """
+    :param user_value: число с которого берем очередную цифру
+    :param val1: счетчик четных цифр
+    :param val2: счетчик неченых цифр
+    :return:
+    """
+    if user_value == 0:
+        return val1, val2
+
+    cur_digit = user_value % 10
+    if cur_digit % 2 == 0:
+        val1 += 1
+    else:
+        val2 += 1
+    return d_count(user_value // 10, val1, val2)
+
+
+user_value = input('Введите число: ').strip()
+if not user_value.isdigit():
+    print('Вы ввели не число!')
+
+res = d_count(int(user_value), 0, 0)
+print(f'Ваше число {user_value}')
+print(f'Количество четных цифр {res[0]} нечетных {res[1]}')

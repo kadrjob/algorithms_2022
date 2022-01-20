@@ -19,3 +19,18 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def run(crn_num, chr_count=1):
+    """
+    :param crn_num: номер символа
+    :param chr_count: количество выведенных символов
+    :return: код символа - значение
+    """
+    if crn_num == 128:
+        return '\n'
+
+    return f'{crn_num} - {chr(crn_num)}' + ('\n' if chr_count % 10 == 0 else ' ') + run(crn_num + 1, chr_count + 1)
+
+
+print(run(32))

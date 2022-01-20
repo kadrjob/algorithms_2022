@@ -18,3 +18,17 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230->3210
 """
+
+# мыслей как проверить на конечный ноль без среза нет ((
+def run(user_val):
+    if user_val == 0:
+        return ''
+
+    return str(user_val % 10) + run(user_val // 10)
+
+
+user_val_str = input('Введите число, которое требуется перевернуть: ')
+if not user_val_str.isdigit():
+    print('Вы ввели не число')
+else:
+    print(f'Перевернутое число: {run(int(user_val_str))}')
