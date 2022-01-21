@@ -21,7 +21,7 @@ def run(val, att):
     if att == 0:
         return 0
 
-    return (1 if att % 2 == 0 else -1) * val + run(val / 2, att - 1)
+    return (-1 if att % 2 == 0 else 1) * val + run(val / 2, att - 1)
 
 
 att_count = input('Введите количество элементов: ')
