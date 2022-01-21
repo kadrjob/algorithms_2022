@@ -7,3 +7,45 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+
+import random
+import sys
+
+
+def run(val=None, max_att=10, cur_att=1):
+    """
+    :param val: загаданное число
+    :param max_att: максимальное количество попыток
+    :param cur_att: текущая попытка
+    :return:
+    """
+    # если число не загадано - задаем
+    if val is None:
+        val = random.randint(0, 100)
+
+    # контроль количества попыток
+    if cur_att > max_att:
+        print(f'Так и смогли угадать число {val} (((')
+        sys.exit(0)
+
+    # контролируем правильность ввода или выходим из программы
+    user_val_str = input(f'Попытка {cur_att}. Введите число: ')
+    while not user_val_str.isdigit():
+        print(f'Вы ввели не число. Введите число или 0 для выхода.')
+        user_val_str = input(f'Попытка {cur_att}. Введите число: ')
+        if user_val_str == '0':
+            sys.exit(0)
+
+    # конвертируем ввод в число
+    user_val = int(user_val_str)
+
+    # контроль совпадения
+    if user_val == val:
+        print(f'Правильно!!! Вы угадали число {val} с {cur_att} попытки')
+        sys.exit(0)
+    else:
+        print(f'Ваше число {"больше" if user_val > val else "меньше"} загаданного')
+        run(val, max_att, cur_att + 1)
+
+
+run()
