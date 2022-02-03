@@ -15,10 +15,12 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
-from statistics import median
 import time
-from memory_profiler import memory_usage
 from random import randint
+from statistics import median
+
+from memory_profiler import memory_usage
+
 
 def decor(func):
     def wrapper(*args, **kwargs):
@@ -33,9 +35,11 @@ def decor(func):
 
     return wrapper
 
+
 @decor
 def test_func(m):
     num = [randint(1, 50) for x in range(1, 2 * m + 2)]
     return median(num)
+
 
 print(test_func(10))

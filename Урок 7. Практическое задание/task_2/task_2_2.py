@@ -15,8 +15,10 @@
 """
 
 import time
-from memory_profiler import memory_usage
 from random import randint
+
+from memory_profiler import memory_usage
+
 
 def decor(func):
     def wrapper(*args, **kwargs):
@@ -31,6 +33,7 @@ def decor(func):
 
     return wrapper
 
+
 @decor
 def test_func(m):
     num = [randint(1, 50) for x in range(1, 2 * m + 2)]
@@ -39,5 +42,6 @@ def test_func(m):
         num.remove(max(num))
         i += 1
     return max(num)
+
 
 print(test_func(10))
