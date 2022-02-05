@@ -30,3 +30,59 @@
 
 Это файл для первого скрипта
 """
+
+import time
+
+from memory_profiler import memory_usage
+
+
+def decor(func):
+    def wrapper(*args, **kwargs):
+        time_start = time.perf_counter()
+        m1 = memory_usage()
+        res = func(args[0])
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        time_end = time.perf_counter() - time_start
+        print(f"Выполнение {func.__name__} заняло {mem_diff} Mib. Время выполнения {time_end}")
+        return res, mem_diff
+
+    return wrapper
+
+
+# урок 4 задача 1
+# оригинальная функция
+@decor
+def func_4_orig(nums):
+    new_arr = [nums.index(x) for x in nums if x % 2 == 0]
+    return new_arr
+
+
+# оптимизированная функция
+@decor
+def func_4_opt(nums):
+    def get_arr_num_idx(nums_gen):
+        for x in nums_gen:
+            if x % 2 == 0:
+                yield nums_gen.index(x)
+
+    new_arr = [*get_arr_num_idx(nums)]
+    return new_arr
+
+
+nums = [x * 2 for x in range(1000)]
+print(func_4_orig(nums))
+print(func_4_opt(nums))
+
+"""
+Результат
+Выполнение func_4_orig заняло 0.04296875 Mib. Время выполнения 0.20791668800000002
+([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22 ....])
+Выполнение func_4_opt заняло 0.0 Mib. Время выполнения 0.20799184500000006
+([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22 ....])
+
+Вывод
+Оптимизация достигается за счет того, 
+что в оптимизированной функции импользуются ленивые вычисления и оператор yield
+
+"""
